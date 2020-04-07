@@ -9,6 +9,14 @@ To get started, you will first need many cropped plate images containing positiv
 
 The [Plate Tagger Utility](https://github.com/openalpr/plate_tagger)  is helpful to tag the plate locations.  After tagging the plates you can run the "crop_plates.py" function to extract the crops from the input images at your target aspect ratio.
 
+```
+python3 -m venv td
+source td/bin/activate
+python -m pip install --editable .
+python3 crop_plates.py --input_dir /tmp/pool --out_dir ~/work/ANPR-RevenueNSW/data/cropped_plates --plate_width 370 --plate_height 130
+```
+Change the width and height based on your numberplate sizes
+
 After you've collected many (hundreds to thousands) of positive plate images, the next step is to train the detector.  First you must configure the training script to use the correct dimensions.
 
 Edit the prep.py script and change the WIDTH, HEIGHT, and COUNTRY variables to match the country that you are training.  The width and height should be proportional to the plate size (slightly larger is OK).  A total pixel area of around 650 seems to work best.  Also, adjust the path to your OpenCV libraries, if that needs to be changed.
