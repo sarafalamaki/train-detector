@@ -23,7 +23,8 @@ setup(
     install_requires = [
         'numpy',
         'pyaml',
-        'opencv-python'
+        'opencv-python',
+        'Pillow'
         ],
     extras_require = {
         "dev": [

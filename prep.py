@@ -10,7 +10,7 @@ import sys
 
 WIDTH=36
 HEIGHT=18
-COUNTRY='us'
+COUNTRY='nsw'
 
 #WIDTH=52
 #HEIGHT=13
@@ -21,10 +21,12 @@ COUNTRY='us'
 #COUNTRY='br'
 
 #constants
-#OPENCV_DIR= '/home/mhill/projects/alpr/libraries/opencv/bin'
-#SAMPLE_CREATOR = OPENCV_DIR + '/opencv_createsamples'
+OPENCV_DIR = "/usr/local/Cellar/opencv/4.2.0_3/bin/"
+SAMPLE_CREATOR = "/usr/local/Cellar/opencv@2/2.4.13.7_7/bin/opencv_createsamples"
+TRAINCASCADE = "/usr/local/Cellar/opencv/4.2.0_3/bin//opencv_traincascade"
 
-BASE_DIR            = '.'
+
+BASE_DIR            = './'
 
 OUTPUT_DIR          = BASE_DIR + "out/"
 INPUT_NEGATIVE_DIR  = BASE_DIR + 'raw-neg/'
@@ -152,7 +154,7 @@ elif command == "pos":
 
 
     # Collapse the samples into a vector file
-    execStr = '%s/opencv_createsamples %s %s %s -num %d' % (OPENCV_DIR, vector_arg, width_height_arg, info_arg, total_pics )
+    execStr = '%s %s %s %s -num %d' % (SAMPLE_CREATOR, vector_arg, width_height_arg, info_arg, total_pics )
     print(execStr)
 
     os.system(execStr)
@@ -161,7 +163,7 @@ elif command == "pos":
 
 elif command == "showpos":
     print("SHOW")
-    execStr = '%s/opencv_createsamples -vec %s -w %d -h %d' % (OPENCV_DIR, VEC_FILE, WIDTH, HEIGHT )
+    execStr = '%s -vec %s -w %d -h %d' % (SAMPLE_CREATOR, VEC_FILE, WIDTH, HEIGHT )
     print(execStr)
     os.system(execStr)
     #opencv_createsamples -vec ../positive/vecfile.vec -w 120 -h 60
@@ -177,7 +179,7 @@ elif command == "train":
         num_pos_samples = -1
     num_neg_samples = file_len(NEGATIVE_INFO_FILE)
 
-    execStr = '%s/opencv_traincascade %s %s %s %s -numPos %d -numNeg %d -maxFalseAlarmRate 0.45 -featureType LBP -numStages 13' % (OPENCV_DIR, data_arg, vector_arg, bg_arg, width_height_arg, num_pos_samples, num_neg_samples )
+    execStr = '%s %s %s %s %s -numPos %d -numNeg %d -maxFalseAlarmRate 0.45 -featureType LBP -numStages 13' % (TRAINCASCADE, data_arg, vector_arg, bg_arg, width_height_arg, num_pos_samples, num_neg_samples )
 
     print("Execute the following command to start training:%s" % execStr)
     #opencv_traincascade -data ./out/ -vec ./positive/vecfile.vec -bg ./negative/negative.txt -w 120 -h 60 -numPos 99 -numNeg 5  -featureType LBP -numStages 8
