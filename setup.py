@@ -22,7 +22,7 @@ setup(
         ],
     install_requires = [
         'numpy',
-        'pyaml'
+        'pyaml',
         'opencv-python'
         ],
     extras_require = {
