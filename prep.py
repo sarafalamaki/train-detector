@@ -23,7 +23,7 @@ COUNTRY='nsw'
 #constants
 OPENCV_DIR = "/usr/local/Cellar/opencv/4.2.0_3/bin/"
 SAMPLE_CREATOR = "/usr/local/Cellar/opencv@2/2.4.13.7_7/bin/opencv_createsamples"
-TRAINCASCADE = "/usr/local/Cellar/opencv/4.2.0_3/bin//opencv_traincascade"
+TRAINCASCADE = "/usr/local/Cellar/opencv@2/2.4.13.7_7/bin/opencv_traincascade"
 
 
 BASE_DIR            = './'
@@ -179,9 +179,9 @@ elif command == "train":
         num_pos_samples = -1
     num_neg_samples = file_len(NEGATIVE_INFO_FILE)
 
-    execStr = '%s %s %s %s %s -numPos %d -numNeg %d -maxFalseAlarmRate 0.45 -featureType LBP -numStages 13' % (TRAINCASCADE, data_arg, vector_arg, bg_arg, width_height_arg, num_pos_samples, num_neg_samples )
+    execStr = '%s %s %s %s %s -numPos %d -numNeg %d -maxFalseAlarmRate 0.45 -featureType LBP -numStages 13 -precalcValBufSize 0 -precalcIdxBufSize 0' % (TRAINCASCADE, data_arg, vector_arg, bg_arg, width_height_arg, num_pos_samples, num_neg_samples )
 
-    print("Execute the following command to start training:%s" % execStr)
+    print("Execute the following command to start training:\n%s" % execStr)
     #opencv_traincascade -data ./out/ -vec ./positive/vecfile.vec -bg ./negative/negative.txt -w 120 -h 60 -numPos 99 -numNeg 5  -featureType LBP -numStages 8
     #opencv_traincascade -data ./out/ -vec ./positive/vecfile.vec -bg ./negative/negative.txt -w 120 -h 60 -numPos 99 -numNeg 5  -featureType LBP -numStages 20
 elif command == "SDFLSDFSDFSDF":
